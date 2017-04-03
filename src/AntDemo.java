@@ -1,4 +1,3 @@
-
 /**
  * Ein Hello World Beispiel.
  * 

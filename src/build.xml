@@ -21,20 +21,14 @@
 		<javac srcdir="." destdir="${build}"/>
 	</target>
 
-	<target name="dist" depends="compile" description="generate the distribution">
-		<!-- Put everything in ${build} into the nn-${DSTAMP}.jar file -->
-		<jar jarfile="${dist}/antdemo-${DSTAMP}.jar" basedir="${build}"/>
-	</target>
-
-
-	<target name = "jar" depends="dist">
-		<delete file = "AntDemo.jar"/>
-		<delete file = "MANIFEST.MF"/>
+	<target name = "dist" depends="compile" description="generate the distribution">
+		<!-- Put everything in ${build} into the antdemo-${DSTAMP}.jar file -->
 		<manifest file = "MANIFEST.MF">
+			<attribute name = "Codebase" value= "*" />
+			<attribute name = "Permissions" value= "all-permissions" />
 			<attribute name = "Main-Class" value = "AntDemo"/>
-			<attribute name = "Class-Path" value = "."/>
 		</manifest>
-		<jar destfile = "AntDemo.jar" basedir = "." includes = "*.class"  manifest = "MANIFEST.MF"/>
+		<jar destfile = "${dist}/antdemo-${DSTAMP}.jar" basedir="${build}" includes = "*.class"  manifest = "MANIFEST.MF"/>
 	</target>
 
 
@@ -42,6 +36,8 @@
 		<!-- Delete the ${build} and ${dist} directory trees -->
 		<delete dir="${build}"/>
 		<delete dir="${dist}"/>
+		<delete file = "AntDemo.jar"/>
+		<delete file = "MANIFEST.MF"/>
 	</target>
 
 </project>
