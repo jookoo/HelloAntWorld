@@ -27,7 +27,7 @@
 	</target>
 
 
-	<target name = "jar">
+	<target name = "jar" depends="dist">
 		<delete file = "AntDemo.jar"/>
 		<delete file = "MANIFEST.MF"/>
 		<manifest file = "MANIFEST.MF">
