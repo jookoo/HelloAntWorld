@@ -1,34 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project name="ANTDemo" default="dist" basedir=".">
-  <description>
+	<description>
     ein erstes Beispiel zur Erstellung
   </description>
-	
-  <!-- set global properties for this build -->
-  <property name="src" location="src"/>
-  <property name="build" location="build"/>
-  <property name="dist" location="dist"/>
 
-  <target name="init">
-    <!-- Create the time stamp -->
-    <tstamp/>
-    <!-- Create the build directory structure used by compile -->
-    <mkdir dir="${build}"/>
-  </target>
+	<!-- set global properties for this build -->
+	<property name="src" location="src"/>
+	<property name="build" location="build"/>
+	<property name="dist" location="dist"/>
 
-  <target name="compile" depends="init" description="compile the source">
-    <!-- Compile the java code from ${src} into ${build} -->
-    <javac srcdir="." destdir="${build}"/>
-  </target>
+	<target name="init">
+		<!-- Create the time stamp -->
+		<tstamp/>
+		<!-- Create the build directory structure used by compile -->
+		<mkdir dir="${build}"/>
+	</target>
 
-  <target name="dist" depends="compile" description="generate the distribution">
-    <!-- Put everything in ${build} into the nn-${DSTAMP}.jar file -->
-    <jar jarfile="${dist}/antdemo-${DSTAMP}.jar" basedir="${build}"/>
-  </target>
+	<target name="compile" depends="init" description="compile the source">
+		<!-- Compile the java code from ${src} into ${build} -->
+		<javac srcdir="." destdir="${build}"/>
+	</target>
 
-  <target name="clean" description="clean up">
-    <!-- Delete the ${build} and ${dist} directory trees -->
-    <delete dir="${build}"/>
-    <delete dir="${dist}"/>
-  </target>
-	
+	<target name="dist" depends="compile" description="generate the distribution">
+		<!-- Put everything in ${build} into the nn-${DSTAMP}.jar file -->
+		<jar jarfile="${dist}/antdemo-${DSTAMP}.jar" basedir="${build}"/>
+	</target>
+
+
+	<target name = "jar">
+		<delete file = "AntDemo.jar"/>
+		<delete file = "MANIFEST.MF"/>
+		<manifest file = "MANIFEST.MF">
+			<attribute name = "Main-Class" value = "AntDemo"/>
+			<attribute name = "Class-Path" value = "."/>
+		</manifest>
+		<jar destfile = "AntDemo.jar" basedir = "." includes = "*.class"  manifest = "MANIFEST.MF"/>
+	</target>
+
+
+	<target name="clean" description="clean up">
+		<!-- Delete the ${build} and ${dist} directory trees -->
+		<delete dir="${build}"/>
+		<delete dir="${dist}"/>
+	</target>
+
 </project>
